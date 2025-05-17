@@ -1,8 +1,8 @@
 'use client';
 import { Suspense, useEffect, useState } from 'react';
-// import Sidebar from '@/components/Sidebar';
 import Dashboard from '@/components/Dashboard';
 import T from '@/components/home';
+import Sidebar from '@/components/Sidebar';
 import { Wordpress } from '@/lib/wordpress';
 import { useHistory } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ export default function Home() {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'profile', label: 'Profile' },
-    { id: 'settings', label: 'Settings' },
+    // { id: 'settings', label: 'Settings' },
   ];
 
   // 调试状态变化
@@ -83,8 +83,8 @@ export default function Home() {
         return <Dashboard key="dashboard" />;
       case 'profile':
         return <T key="profile" data={data} />;
-      case 'settings':
-        return <T key="settings" />;
+      // case 'settings':
+      //   return <T key="settings" />;
       default:
         return <Dashboard key="dashboard" />;
     }
@@ -99,7 +99,12 @@ export default function Home() {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <div className="w-64 bg-gray-800 text-white flex flex-col">
+      <Sidebar
+        menuItems={menuItems}
+        activeSection={activeSection}
+        onMenuClick={handleMenuClick} />
+        {/* // 传递点击处理函数 */}
+      {/* <div className="w-64 bg-gray-800 text-white flex flex-col">
         <div className="p-4 text-2xl font-bold">Menu</div>
         <nav className="flex-1">
           <ul>
@@ -117,7 +122,7 @@ export default function Home() {
             ))}
           </ul>
         </nav>
-      </div>
+      </div> */}
       {/* Main Content */}
       <div className="flex-1 p-8 bg-gray-100 overflow-auto">
         <Suspense fallback={<div className="text-gray-500">Loading content...</div>}>
